@@ -13,6 +13,7 @@
 2. https://github.com/sebas673/Harmonizer
 3. https://github.com/glasperfan/dasharmonie
 4. https://github.com/arpanlaha/harmonizer
+5. https://github.com/sonofthomp/midi-harmonizer?tab=readme-ov-file
 
 ### Intro/outro generator:
 1. https://github.com/MieszkoMakuch/midi-melody-generator
