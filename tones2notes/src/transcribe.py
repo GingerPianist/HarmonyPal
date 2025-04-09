@@ -1,6 +1,7 @@
 import os
 import sys
 sys.path.insert(1, os.path.join(sys.path[0], '../utils'))
+sys.path.insert(1, os.path.join(sys.path[0], '../src'))
 import numpy as np
 import argparse
 import time
