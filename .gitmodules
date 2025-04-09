@@ -1,0 +1,3 @@
+[submodule "EMO_Harmonizer"]
+	path = EMO_Harmonizer
+	url = ./EMO_Harmonizer/
