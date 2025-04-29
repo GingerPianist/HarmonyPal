@@ -1,5 +1,6 @@
-import config, os
-from processing import note_detection_with_onset_offset_regress
+from . import config
+import os
+from .processing import note_detection_with_onset_offset_regress
 import numpy as np
 import pickle
 import h5py
@@ -7,7 +8,7 @@ import mir_eval
 from sklearn import metrics
 from concurrent.futures import ProcessPoolExecutor
 
-from processing import get_filename, traverse_folder, onsets_frames_note_detection
+from .processing import get_filename, traverse_folder, onsets_frames_note_detection
 
 
 # Onset Post Processor (without regression)

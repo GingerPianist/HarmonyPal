@@ -503,6 +503,9 @@ if __name__ == '__main__':
         raise ValueError("'relative_chord' and 'transpose_to_C' can't be True together")
 
     # data dir
+    # # Print current working directory
+    print("EMOPIA DIR:", os.getcwd())
+    # os.chdir('../')
     emopia_data_home = 'midi_data/EMOPIA/midis_chord11'
     midi_files = os.listdir(emopia_data_home)
 

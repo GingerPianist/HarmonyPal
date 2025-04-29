@@ -5,7 +5,7 @@ import soundfile as sf
 import numpy as np
 import datetime
 import pickle
-import config
+from . import config
 from mido import MidiFile
 
 def create_folder(fd):          # create folder if not already exists

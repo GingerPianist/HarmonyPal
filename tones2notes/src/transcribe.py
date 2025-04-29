@@ -9,11 +9,11 @@ import matplotlib.pyplot as plt
 
 import torch
  
-from processing import (create_folder, get_filename, write_events_to_midi, load_audio)
-from post_process import RegressionPostProcessor, OnsetsFramesPostProcessor
-from models import CCNN, CRNN, CRNN_Conditioning
-from pytorch_utils import move_data_to_device, forward
-import config
+from ..utils.processing import (create_folder, get_filename, write_events_to_midi, load_audio)
+from ..utils.post_process import RegressionPostProcessor, OnsetsFramesPostProcessor
+from .models import CCNN, CRNN, CRNN_Conditioning
+from .pytorch_utils import move_data_to_device, forward
+from  ..utils import config
 
 
 # Main Class for Transcribing a given Audio
@@ -44,7 +44,7 @@ class PianoTranscription(object):
             print('GPU number: {}'.format(torch.cuda.device_count()))
             self.model = torch.nn.DataParallel(self.model)
         else:
-            print('Using CPU.')
+            print('Transcribing your file using CPU.')
 
     def transcribe(self, audio, midi_path):     # transcribing a single given audio
         audio = audio[None, :]    # (1, audio_samples)

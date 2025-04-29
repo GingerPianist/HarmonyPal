@@ -142,7 +142,7 @@ if __name__ == '__main__':
     events2dictionary(events_dir, add_velocity=False, add_emotion=True, add_tempo=False,
                       num_emotion=num_emotion, relative=relative)
 
-    events_dir = 'hooktheory_events/lead_sheet_chord11_{}'.format(representation)
-    print(events_dir)
-    events2dictionary(events_dir, add_velocity=False, add_emotion=True, add_tempo=False,
-                      num_emotion=num_emotion, relative=relative)
+    # events_dir = 'hooktheory_events/lead_sheet_chord11_{}'.format(representation)
+    # print(events_dir)
+    # events2dictionary(events_dir, add_velocity=False, add_emotion=True, add_tempo=False,
+    #                   num_emotion=num_emotion, relative=relative)

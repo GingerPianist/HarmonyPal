@@ -47,4 +47,4 @@ def split_hooktheory(output_dir):
 
 if __name__ == '__main__':
     split_emopia('emopia_events/data_splits')
-    split_hooktheory('hooktheory_events/data_splits')
+    #split_hooktheory('hooktheory_events/data_splits')
