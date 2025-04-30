@@ -28,15 +28,26 @@ The Intro/Outro Generator extends the given harmonization by creating stylistica
 ### MidiTo Wave
 The MidiToWave module is responsible for converting digital MIDI or MusicXML files into audio recordings. Its primary functions is to  render the generated harmony or musical arrangement, enabling the user to efficiently evaluate and verify the output of the generation process.
 
-## Installation
-(later)
+## Installation and Usage
+1. Clone the repository,
+2. Download and extract the model from: 
+   [https://drive.google.com/file/d/1v5iaw_sf0HgEaeOntVIIerykm5BGGf8y/view](https://drive.google.com/file/d/1v5iaw_sf0HgEaeOntVIIerykm5BGGf8y/view)
+3. Install the requirements from `requirements.txt` (Python 3.8 recommended): 
+   ```bash
+   pip install -r requirements.txt
+4. To be able to play the harmonized file as .wav install midi2audio to synthesize generated MIDI to audio (optional):
+    ```bash
+   pip install midi2audio
+   wget https://freepats.zenvoid.org/Piano/SalamanderGrandPiano/SalamanderGrandPiano-SF2-V3+20200602.tar.xz
+   tar -xvf SalamanderGrandPiano-SF2-V3+20200602.tar.xz
 
-## Usage
-(later)
+5.  Place the .mp3 file to harmonize in the repository root directory, 
+6. Run the script:
+   ```bash
+   python3 harmonyPal.py --audio_file <path to your audio file> --key <letter indicating the key of the harmonized file> [--play_wav]
+7. The harmonized melody will be stored in EMO_Harmonizer/generation/emopia_functional_rule/... catalog as the .mid file, alongside with .wav (if --play_wav flag was present). To open as music score I recommand importing the files to MusicScore. 
 
 ## Contributing
-(Should it stay? - template)
-
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 

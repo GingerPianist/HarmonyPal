@@ -4,6 +4,7 @@ import argparse
 import pandas as pd
 import subprocess
 import shutil
+import warnings
 from pathlib import Path
 from tones2notes.src.transcribe_and_play import PianoTranscription
 
@@ -88,10 +89,13 @@ def build_data_splits():
 
 
 if __name__ == "__main__":
+    warnings.filterwarnings("ignore")
+    warnings.filterwarnings("ignore", category=UserWarning)
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--audio_file', type=str, required=True, help='Path to audio file')
     parser.add_argument('--key', type=str, required=True, help='Key in which the harmonized song is')
+    parser.add_argument('--play_wav', action='store_true', required=False, help='If present indicates that the user also wants a wav file')
     args = parser.parse_args()
     melodyKey = args.key
     audioFile = args.audio_file.split('/')[-1]
@@ -128,36 +132,27 @@ if __name__ == "__main__":
     build_data_splits()
 
     # Run inference.py and harmonize the requested file
-    command = [
-        "python3", "inference.py",
-        "--configuration=config/emopia_finetune.yaml",
-        "--representation=functional",
-        "--key_determine=rule",
-        "--inference_params=emo_harmonizer_ckpt_functional/best_params.pt",
-        "--output_dir=generation/emopia_functional_rule"
-    ]
+    if args.play_wav:
+        command = [
+            "python3", "inference.py",
+            "--configuration=config/emopia_finetune.yaml",
+            "--representation=functional",
+            "--key_determine=rule",
+            "--inference_params=emo_harmonizer_ckpt_functional/best_params.pt",
+            "--output_dir=generation/emopia_functional_rule",
+            "--play_midi"
+        ]
+    else:
+        command = [
+            "python3", "inference.py",
+            "--configuration=config/emopia_finetune.yaml",
+            "--representation=functional",
+            "--key_determine=rule",
+            "--inference_params=emo_harmonizer_ckpt_functional/best_params.pt",
+            "--output_dir=generation/emopia_functional_rule"
+        ]
     subprocess.run(command, check=True)
 
-
-    # Old harmonizing library
-    # #Autoharmonizer part
-    # # Load data from 'inputs'
-    # data_corpus = convert_files(midiFile, fromDataset=False)
-    #
-    # # Build harmonic rhythm and chord model
-    # model = build_model(SEGMENT_LENGTH, RNN_SIZE, NUM_LAYERS, DROPOUT, WEIGHTS_PATH, training=False)
-    #
-    # # Process each melody sequence
-    # for idx in trange(len(data_corpus)):
-    #     melody_data = data_corpus[idx][0]
-    #     beat_data = data_corpus[idx][1]
-    #     key_data = data_corpus[idx][2]
-    #     score = data_corpus[idx][3]
-    #     filename = data_corpus[idx][4]
-    #
-    #     # Generate harmonic rhythm and chord data
-    #     chord_data = generate_chord(model, melody_data, beat_data, key_data)
-    #
-    #     # Export music file
-    #     export_music(score, beat_data, chord_data, filename)
+    #Removing file from EMO_Harmonizer to make foom for next usage
+    os.remove("midi_data/EMOPIA/midis_chord11/" + modifiedFilename + ".mid")
 
