@@ -1,10 +1,12 @@
 import os
+import datetime
 import librosa
 import argparse
 import pandas as pd
 import subprocess
 import shutil
 import warnings
+from music21 import converter, environment
 from pathlib import Path
 from tones2notes.src.transcribe_and_play import PianoTranscription
 
@@ -71,7 +73,6 @@ def build_event_representations():
         ], check=True)
         # Print current working directory
 
-
 def built_vocabulary():
     # 2nd - Build Vocabulary for 'functional' representation
     subprocess.run([
@@ -89,6 +90,9 @@ def build_data_splits():
 
 
 if __name__ == "__main__":
+    us = environment.UserSettings()
+    us['musescoreDirectPNGPath'] = '/bin/mscore3'  # Adjust as needed - path to MuseScore
+
     warnings.filterwarnings("ignore")
     warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -96,6 +100,7 @@ if __name__ == "__main__":
     parser.add_argument('--audio_file', type=str, required=True, help='Path to audio file')
     parser.add_argument('--key', type=str, required=True, help='Key in which the harmonized song is')
     parser.add_argument('--play_wav', action='store_true', required=False, help='If present indicates that the user also wants a wav file')
+    parser.add_argument('--gen_path', type=str, required=False,default='output', help='Folder with all generated files')
     args = parser.parse_args()
     melodyKey = args.key
     audioFile = args.audio_file.split('/')[-1]
@@ -153,6 +158,28 @@ if __name__ == "__main__":
         ]
     subprocess.run(command, check=True)
 
-    #Removing file from EMO_Harmonizer to make foom for next usage
-    os.remove("midi_data/EMOPIA/midis_chord11/" + modifiedFilename + ".mid")
+    os.chdir('../')
 
+    # Removing file from EMO_Harmonizer to make room for next usage
+    os.remove("EMO_Harmonizer/midi_data/EMOPIA/midis_chord11/" + modifiedFilename + ".mid")
+
+    # Moving the generated files to the dir specified by user
+    timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+    outputDir = os.path.join(args.gen_path, f"{filename}_{timestamp}")
+    shutil.move("EMO_Harmonizer/generation/emopia_functional_rule/sample_01-" + modifiedFilename, outputDir )
+
+    # Export to pdf
+    # Load MIDI files to music21 and parse
+    scorePositive = converter.parse(os.path.join(outputDir, "lead_sheet_Positive_0.mid"))
+    scoreNegative = converter.parse(os.path.join(outputDir, "lead_sheet_Negative_0.mid"))
+
+    # Export to PDF (will use MuseScore, adjust path to MuseScore in the beginning lines of code if needed)
+    outputPathPositive = os.path.join(outputDir, "music_score_positive.pdf")
+    outputPathNegative = os.path.join(outputDir, "music_score_negative.pdf")
+
+    # Writing to .pdf file and removing the behind .musicxml saved file
+    scorePositive.write('musicxml.pdf', fp=outputPathPositive)
+    scoreNegative.write('musicxml.pdf', fp=outputPathNegative)
+
+    os.remove(os.path.join(outputDir, "music_score_positive.musicxml"))
+    os.remove(os.path.join(outputDir, "music_score_negative.musicxml"))
