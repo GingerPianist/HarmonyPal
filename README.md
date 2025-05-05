@@ -3,13 +3,13 @@
 HarmonyPal is an AI-based system to generate four-voice harmonizations of a given monophonic melody providing with its music score or audio recordings. It extends functionality to create introductions, preludes, and postludes, ensuring stylistic fidelity to renowned composers, musicians or musical styles. 
 
 ## Scheme of the system's workflow
-![picture](block-scheme-final.png)
+![picture](block-scheme-not-yet-made.png)
 
 ## Main concepts
 The system contains of the following blocks (as in the scheme above):
 - Transcript
 - Harmonizer
-- Intro/outro generator
+- Intro/outro generator (not yet made)
 - MidiToWave
 
 Note that the system itself serves variety of functionalities and input or output data formats (entry/exit points of the scheme) may vary depending on the user's purpose.
@@ -22,7 +22,7 @@ The Transcript module serves as one of the entry points and its aim is to transc
 ### Harmonizer
 The Harmonizer is the core component, responsible for generating stylistically accurate four-voice harmonizations. The harmonies produced by Harmonizer will form the foundation for the creation of musical arrangements by Intro/outro generator. Please note that Harmonizer can function as both the system's entry point and the exit one.
 
-### Intro/outro generator
+### Intro/outro generator (not yet made)
 The Intro/Outro Generator extends the given harmonization by creating stylistically cohesive preludes, introductions, or postludes. The followed stylistic shall be chosen beforhand. The outcome is then stored in the digital music score form such as MIDI or MusicXML.
 
 ### MidiTo Wave

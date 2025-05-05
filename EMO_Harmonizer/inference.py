@@ -562,4 +562,4 @@ if __name__ == '__main__':
                     midi_to_wav(output_midi_path, output_wav_path)
 
                 output_event_path = os.path.join(out_path, 'lead_sheet_{}_{}.txt'.format(emotion_env.split('_')[-1], n))
-                event_to_txt(events, output_event_path=output_event_path)
+                #event_to_txt(events, output_event_path=output_event_path)
