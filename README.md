@@ -3,7 +3,7 @@
 HarmonyPal is an AI-based system to generate four-voice harmonizations of a given monophonic melody providing with its music score or audio recordings. It extends functionality to create introductions, preludes, and postludes, ensuring stylistic fidelity to renowned composers, musicians or musical styles. 
 
 ## Scheme of the system's workflow
-![picture](block-scheme-not-yet-made.png)
+![picture](block-scheme-with-not-made.png)
 
 ## Main concepts
 The system contains of the following blocks (as in the scheme above):
@@ -35,17 +35,18 @@ The MidiToWave module is responsible for converting digital MIDI or MusicXML fil
 3. Install the requirements from `requirements.txt` (Python 3.8 recommended): 
    ```bash
    pip install -r requirements.txt
-4. To be able to play the harmonized file as .wav install midi2audio to synthesize generated MIDI to audio (optional):
+4. You also need to download MuseScore (for generating the .pdf music scores) and adjust the path to it in harmonyPal.py   
+5. To be able to play the harmonized file as .wav install midi2audio to synthesize generated MIDI to audio (optional):
     ```bash
    pip install midi2audio
    wget https://freepats.zenvoid.org/Piano/SalamanderGrandPiano/SalamanderGrandPiano-SF2-V3+20200602.tar.xz
    tar -xvf SalamanderGrandPiano-SF2-V3+20200602.tar.xz
 
-5.  Place the .mp3 file to harmonize in the repository root directory, 
-6. Run the script:
+6.  Place the .mp3 file to harmonize in the repository root directory, 
+7. Run the script:
    ```bash
    python3 harmonyPal.py --audio_file <path to your audio file> --key <letter indicating the key of the harmonized file> [--play_wav]
-7. The harmonized melody will be stored in EMO_Harmonizer/generation/emopia_functional_rule/... catalog as the .mid file, alongside with .wav (if --play_wav flag was present). To open as music score I recommand importing the files to MusicScore. 
+8. The harmonized melody will be stored in EMO_Harmonizer/generation/emopia_functional_rule/... catalog as the .mid file, alongside with .wav (if --play_wav flag was present). To open as music score I recommand importing the files to MusicScore. 
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first
