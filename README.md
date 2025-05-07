@@ -45,8 +45,9 @@ The MidiToWave module is responsible for converting digital MIDI or MusicXML fil
 6.  Place the .mp3 file to harmonize in the repository root directory, 
 7. Run the script:
    ```bash
-   python3 harmonyPal.py --audio_file <path to your audio file> --key <letter indicating the key of the harmonized file> [--play_wav]
-8. The harmonized melody will be stored in EMO_Harmonizer/generation/emopia_functional_rule/... catalog as the .mid file, alongside with .wav (if --play_wav flag was present). To open as music score I recommand importing the files to MusicScore. 
+   python3 harmonyPal.py --audio_file <path to your audio file> --key <letter indicating the key of the harmonized file> [--play_wav] [--gen_path <path to preferred output directory>] [--gen_score]
+8. The harmonized melody will be stored in the given catalog or default /output if not specified. There will be 2 .mid files accompanied with .pdfs and .wavs if --play_wav or --gen_score flags were present. 
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first
